@@ -458,7 +458,7 @@ var Draw2DSprite = (function () {
 //function Draw2DSpriteData() {}
 var Draw2DSpriteData = {
     setFromRotatedRectangle: function setFromRotatedRectangleFn(sprite, texture, rect, uvrect, color, rotation, origin) {
-        debug.assert(rect.length === 4);
+        /* debug.assert(rect.length === 4); */
         var x1 = rect[0];
         var y1 = rect[1];
         var x2 = rect[2];
@@ -476,7 +476,7 @@ var Draw2DSpriteData = {
         } else {
             var cx, cy;
             if (origin) {
-                debug.assert(origin.length === 2);
+                /* debug.assert(origin.length === 2); */
                 cx = x1 + origin[0];
                 cy = y1 + origin[1];
             } else {
@@ -503,7 +503,7 @@ var Draw2DSpriteData = {
         }
 
         if (color) {
-            debug.assert(color.length === 4);
+            /* debug.assert(color.length === 4); */
             sprite[8] = color[0];
             sprite[9] = color[1];
             sprite[10] = color[2];
@@ -513,7 +513,7 @@ var Draw2DSpriteData = {
         }
 
         if (uvrect && texture) {
-            debug.assert(uvrect.length === 4);
+            /* debug.assert(uvrect.length === 4); */
             var iwidth = 1 / texture.width;
             var iheight = 1 / texture.height;
             sprite[12] = uvrect[0] * iwidth;
@@ -922,10 +922,10 @@ var Draw2D = (function () {
 
     Draw2D.prototype.begin = function (blendMode, sortMode, nomipmaps) {
         // Check sort mode is well defined (or undefined signifying default)
-        debug.assert(("undefined" === typeof sortMode) || (sortMode in this.sort), "Bad sort mode");
+        /* debug.assert(("undefined" === typeof sortMode) || (sortMode in this.sort), "Bad sort mode"); */
 
         // Check blend mode is well defined (or undefined signifying default)
-        debug.assert(("undefined" === typeof blendMode) || (blendMode in this.blend), "Bad blend mode");
+        /* debug.assert(("undefined" === typeof blendMode) || (blendMode in this.blend), "Bad blend mode"); */
 
         //if there are render states left in the stack
         //and begin has been called without an end
@@ -963,15 +963,15 @@ var Draw2D = (function () {
         if (!firstTime) {
             this.sortModeStack.push(this.sortMode);
             this.blendModeStack.push(this.blendMode);
-            if (debug) {
+            /* if (debug) {
                 this.nomipmapsStack.push(this.nomipmaps);
-            }
+            } */
         }
         this.sortMode = sortMode;
         this.blendMode = blendMode;
-        if (debug) {
+        /* if (debug) {
             this.nomipmaps = !!nomipmaps;
-        }
+        } */
 
         this.prepareSortMode(sortMode);
         this.graphicsDevice.setTechnique(this.blendModeTechniques[blendMode]);
@@ -1209,12 +1209,12 @@ var Draw2D = (function () {
     };
 
     Draw2D.prototype.drawSpriteImmediate = function (sprite) {
-        if (debug) {
+        /* if (debug) {
             var _texture = sprite.getTexture();
             if (_texture) {
                 debug.assert(this.nomipmaps || (0 === (_texture.width & (_texture.width - 1)) && 0 === (_texture.height & (_texture.height - 1))), "Cannot use mipmaps with NPOT textures");
             }
-        }
+        } */
 
         /* tslint:enable:no-bitwise */
         var group = this.drawGroups[0];
@@ -1270,12 +1270,12 @@ var Draw2D = (function () {
     };
 
     Draw2D.prototype.drawSpriteDeferred = function (sprite) {
-        if (debug) {
+        /* if (debug) {
             var _texture = sprite.getTexture();
             if (_texture) {
                 debug.assert(this.nomipmaps || (0 === (_texture.width & (_texture.width - 1)) && 0 === (_texture.height & (_texture.height - 1))), "Cannot use mipmaps with NPOT textures");
             }
-        }
+        } */
 
         /* tslint:enable:no-bitwise */
         var texture = sprite._texture || this.defaultTexture;
@@ -1353,12 +1353,12 @@ var Draw2D = (function () {
     };
 
     Draw2D.prototype.drawSpriteTextured = function (sprite) {
-        if (debug) {
+        /* if (debug) {
             var _texture = sprite.getTexture();
             if (_texture) {
                 debug.assert(this.nomipmaps || (0 === (_texture.width & (_texture.width - 1)) && 0 === (_texture.height & (_texture.height - 1))), "Cannot use mipmaps with NPOT textures");
             }
-        }
+        } */
 
         /* tslint:enable:no-bitwise */
         var texture = sprite._texture || this.defaultTexture;
@@ -1823,10 +1823,10 @@ var Draw2D = (function () {
         o.sortModeStack = [];
         o.blendModeStack = [];
 
-        if (debug) {
+        /* if (debug) {
             o.nomipmaps = false;
             o.nomipmapsStack = [];
-        }
+        } */
 
         // Set of render groups to be dispatched.
         o.drawGroups = [Draw2DGroup.create()];
@@ -2044,12 +2044,12 @@ var Draw2D = (function () {
             opaquenomip: shader.getTechnique("opaquenomip")
         };
 
-        debug.assert(o.blendModeTechniques.additive);
-        debug.assert(o.blendModeTechniques.additivenomip);
-        debug.assert(o.blendModeTechniques.alpha);
-        debug.assert(o.blendModeTechniques.alphanomip);
-        debug.assert(o.blendModeTechniques.opaque);
-        debug.assert(o.blendModeTechniques.opaquenomip);
+        /* debug.assert(o.blendModeTechniques.additive); */
+        /* debug.assert(o.blendModeTechniques.additivenomip); */
+        /* debug.assert(o.blendModeTechniques.alpha); */
+        /* debug.assert(o.blendModeTechniques.alphanomip); */
+        /* debug.assert(o.blendModeTechniques.opaque); */
+        /* debug.assert(o.blendModeTechniques.opaquenomip); */
 
         if (params.blendModes) {
             for (var name in params.blendModes) {

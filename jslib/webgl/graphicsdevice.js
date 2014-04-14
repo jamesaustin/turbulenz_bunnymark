@@ -26,7 +26,7 @@ var TZWebGLTexture = (function () {
         var gd = this.gd;
         var target = this.target;
         gd.bindTexture(target, this.glTexture);
-        debug.assert(arguments.length === 1 || 3 <= arguments.length);
+        /* debug.assert(arguments.length === 1 || 3 <= arguments.length); */
         if (3 <= arguments.length) {
             if (x === undefined) {
                 x = 0;
@@ -93,7 +93,7 @@ var TZWebGLTexture = (function () {
         var offset = 0;
         var n, value, r, g, b, a;
         if (internalFormat === gl.LUMINANCE) {
-            debug.assert(srcStep === 1);
+            /* debug.assert(srcStep === 1); */
             for (n = 0; n < numPixels; n += 1, offset += 4) {
                 r = data[n];
                 rgbaData[offset] = r;
@@ -102,7 +102,7 @@ var TZWebGLTexture = (function () {
                 rgbaData[offset + 3] = 0xff;
             }
         } else if (internalFormat === gl.ALPHA) {
-            debug.assert(srcStep === 1);
+            /* debug.assert(srcStep === 1); */
             for (n = 0; n < numPixels; n += 1, offset += 4) {
                 a = data[n];
                 rgbaData[offset] = 0xff;
@@ -111,7 +111,7 @@ var TZWebGLTexture = (function () {
                 rgbaData[offset + 3] = a;
             }
         } else if (internalFormat === gl.LUMINANCE_ALPHA) {
-            debug.assert(srcStep === 2);
+            /* debug.assert(srcStep === 2); */
             for (n = 0; n < numPixels; n += 2, offset += 4) {
                 r = data[n];
                 a = data[n + 1];
@@ -121,7 +121,7 @@ var TZWebGLTexture = (function () {
                 rgbaData[offset + 3] = a;
             }
         } else if (gltype === gl.UNSIGNED_SHORT_5_6_5) {
-            debug.assert(srcStep === 1);
+            /* debug.assert(srcStep === 1); */
 
             for (n = 0; n < numPixels; n += 1, offset += 4) {
                 value = data[n];
@@ -135,7 +135,7 @@ var TZWebGLTexture = (function () {
             }
             /* tslint:enable:no-bitwise */
         } else if (gltype === gl.UNSIGNED_SHORT_5_5_5_1) {
-            debug.assert(srcStep === 1);
+            /* debug.assert(srcStep === 1); */
 
             for (n = 0; n < numPixels; n += 1, offset += 4) {
                 value = data[n];
@@ -150,7 +150,7 @@ var TZWebGLTexture = (function () {
             }
             /* tslint:enable:no-bitwise */
         } else if (gltype === gl.UNSIGNED_SHORT_4_4_4_4) {
-            debug.assert(srcStep === 1);
+            /* debug.assert(srcStep === 1); */
 
             for (n = 0; n < numPixels; n += 1, offset += 4) {
                 value = data[n];
@@ -466,10 +466,10 @@ var TZWebGLTexture = (function () {
     };
 
     TZWebGLTexture.prototype.updateSubData = function (data, face, level, x, y, w, h) {
-        debug.assert(data);
-        debug.assert(face === 0 || (this.cubemap && face < 6));
-        debug.assert(0 <= x && (x + w) <= this.width);
-        debug.assert(0 <= y && (y + h) <= this.height);
+        /* debug.assert(data); */
+        /* debug.assert(face === 0 || (this.cubemap && face < 6)); */
+        /* debug.assert(0 <= x && (x + w) <= this.width); */
+        /* debug.assert(0 <= y && (y + h) <= this.height); */
         var gd = this.gd;
         var gl = gd.gl;
 
@@ -733,7 +733,7 @@ var TZWebGLTexture = (function () {
                             if (1 < numLevels) {
                                 if (!tex.mipmaps) {
                                     tex.mipmaps = true;
-                                    debug.log("Mipmap levels provided for texture created without mipmaps enabled: " + tex.name);
+                                    /* debug.log("Mipmap levels provided for texture created without mipmaps enabled: " + tex.name); */
                                 }
                             }
                             var result = tex.createGLTexture(data);
@@ -832,7 +832,7 @@ var TZWebGLTexture = (function () {
                     } else if (extension === '.png') {
                         dataBlob = new Blob([data], { type: "image/png" });
                     }
-                    debug.assert(data.length === dataBlob.size, "Blob constructor does not support typed arrays.");
+                    /* debug.assert(data.length === dataBlob.size, "Blob constructor does not support typed arrays."); */
                     img.onload = function blobImageLoadedFn() {
                         imageLoaded();
                         URL.revokeObjectURL(img.src);
@@ -1359,28 +1359,28 @@ var WebGLRenderTarget = (function () {
 
     WebGLRenderTarget.prototype.setColorTexture0 = function (colorTexture0) {
         var oldColorTexture0 = this.colorTexture0;
-        debug.assert(oldColorTexture0 && colorTexture0 && oldColorTexture0.width === colorTexture0.width && oldColorTexture0.height === colorTexture0.height && oldColorTexture0.format === colorTexture0.format && oldColorTexture0.cubemap === colorTexture0.cubemap);
+        /* debug.assert(oldColorTexture0 && colorTexture0 && oldColorTexture0.width === colorTexture0.width && oldColorTexture0.height === colorTexture0.height && oldColorTexture0.format === colorTexture0.format && oldColorTexture0.cubemap === colorTexture0.cubemap); */
         this.colorTexture0 = (colorTexture0);
         this._updateColorAttachement(this.colorTexture0, 0);
     };
 
     WebGLRenderTarget.prototype.setColorTexture1 = function (colorTexture1) {
         var oldColorTexture1 = this.colorTexture1;
-        debug.assert(oldColorTexture1 && colorTexture1 && oldColorTexture1.width === colorTexture1.width && oldColorTexture1.height === colorTexture1.height && oldColorTexture1.format === colorTexture1.format && oldColorTexture1.cubemap === colorTexture1.cubemap);
+        /* debug.assert(oldColorTexture1 && colorTexture1 && oldColorTexture1.width === colorTexture1.width && oldColorTexture1.height === colorTexture1.height && oldColorTexture1.format === colorTexture1.format && oldColorTexture1.cubemap === colorTexture1.cubemap); */
         this.colorTexture1 = (colorTexture1);
         this._updateColorAttachement(this.colorTexture1, 1);
     };
 
     WebGLRenderTarget.prototype.setColorTexture2 = function (colorTexture2) {
         var oldColorTexture2 = this.colorTexture2;
-        debug.assert(oldColorTexture2 && colorTexture2 && oldColorTexture2.width === colorTexture2.width && oldColorTexture2.height === colorTexture2.height && oldColorTexture2.format === colorTexture2.format && oldColorTexture2.cubemap === colorTexture2.cubemap);
+        /* debug.assert(oldColorTexture2 && colorTexture2 && oldColorTexture2.width === colorTexture2.width && oldColorTexture2.height === colorTexture2.height && oldColorTexture2.format === colorTexture2.format && oldColorTexture2.cubemap === colorTexture2.cubemap); */
         this.colorTexture2 = (colorTexture2);
         this._updateColorAttachement(this.colorTexture2, 2);
     };
 
     WebGLRenderTarget.prototype.setColorTexture3 = function (colorTexture3) {
         var oldColorTexture3 = this.colorTexture3;
-        debug.assert(oldColorTexture3 && colorTexture3 && oldColorTexture3.width === colorTexture3.width && oldColorTexture3.height === colorTexture3.height && oldColorTexture3.format === colorTexture3.format && oldColorTexture3.cubemap === colorTexture3.cubemap);
+        /* debug.assert(oldColorTexture3 && colorTexture3 && oldColorTexture3.width === colorTexture3.width && oldColorTexture3.height === colorTexture3.height && oldColorTexture3.format === colorTexture3.format && oldColorTexture3.cubemap === colorTexture3.cubemap); */
         this.colorTexture3 = (colorTexture3);
         this._updateColorAttachement(this.colorTexture3, 3);
     };
@@ -1633,7 +1633,7 @@ var WebGLIndexBuffer = (function () {
         if (numIndices === undefined) {
             numIndices = this.numIndices;
         }
-        debug.assert(offset + numIndices <= this.numIndices, "IndexBuffer.setData: invalid 'offset' and/or " + "'numIndices' arguments");
+        /* debug.assert(offset + numIndices <= this.numIndices, "IndexBuffer.setData: invalid 'offset' and/or " + "'numIndices' arguments"); */
 
         var gd = this.gd;
         var gl = gd.gl;
@@ -2664,9 +2664,9 @@ var WebGLTechnique = (function () {
             this.initialize(gd);
         }
 
-        if (debug) {
+        /* if (debug) {
             gd.metrics.techniqueChanges += 1;
-        }
+        } */
     };
 
     WebGLTechnique.prototype.deactivate = function () {
@@ -2984,7 +2984,7 @@ var WebGLTechnique = (function () {
         if (1 < numPasses) {
             if (gd.drawArray !== gd.drawArrayMultiPass) {
                 gd.drawArray = gd.drawArrayMultiPass;
-                debug.log("Detected technique with multiple passes, switching to multi pass support.");
+                /* debug.log("Detected technique with multiple passes, switching to multi pass support."); */
             }
         }
 
@@ -3554,9 +3554,9 @@ var WebGLGraphicsDevice = (function () {
 
             gl.drawElements(primitive, numIndices, format, offset);
 
-            if (debug) {
+            /* if (debug) {
                 this.metrics.addPrimitives(primitive, numIndices);
-            }
+            } */
         } else {
             for (var p = 0; p < numPasses; p += 1) {
                 var pass = passes[p];
@@ -3572,9 +3572,9 @@ var WebGLGraphicsDevice = (function () {
 
                 gl.drawElements(primitive, numIndices, format, offset);
 
-                if (debug) {
+                /* if (debug) {
                     this.metrics.addPrimitives(primitive, numIndices);
-                }
+                } */
             }
         }
     };
@@ -3603,9 +3603,9 @@ var WebGLGraphicsDevice = (function () {
 
             gl.drawArrays(primitive, first, numVertices);
 
-            if (debug) {
+            /* if (debug) {
                 this.metrics.addPrimitives(primitive, numVertices);
-            }
+            } */
         } else {
             for (var p = 0; p < numPasses; p += 1) {
                 var pass = passes[p];
@@ -3621,9 +3621,9 @@ var WebGLGraphicsDevice = (function () {
 
                 gl.drawArrays(primitive, first, numVertices);
 
-                if (debug) {
+                /* if (debug) {
                     this.metrics.addPrimitives(primitive, numVertices);
-                }
+                } */
             }
         }
     };
@@ -3833,10 +3833,10 @@ var WebGLGraphicsDevice = (function () {
     };
 
     WebGLGraphicsDevice.prototype.setStream = function (vertexBuffer, semantics, offset) {
-        if (debug) {
+        /* if (debug) {
             debug.assert(vertexBuffer instanceof WebGLVertexBuffer);
             debug.assert(semantics instanceof WebGLSemantics);
-        }
+        } */
 
         if (offset) {
             offset *= (vertexBuffer).strideInBytes;
@@ -3869,9 +3869,9 @@ var WebGLGraphicsDevice = (function () {
             var gl = this.gl;
             gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, glBuffer);
 
-            if (debug) {
+            /* if (debug) {
                 this.metrics.indexBufferChanges += 1;
-            }
+            } */
         }
     };
 
@@ -3989,9 +3989,9 @@ var WebGLGraphicsDevice = (function () {
                     indexFormat = indexBuffer.format;
                     indexStride = indexBuffer.stride;
 
-                    if (debug) {
+                    /* if (debug) {
                         this.metrics.indexBufferChanges += 1;
-                    }
+                    } */
                 }
 
                 firstIndex *= indexStride;
@@ -4003,18 +4003,18 @@ var WebGLGraphicsDevice = (function () {
 
                         gl.drawElements(primitive, count, indexFormat, firstIndex);
 
-                        if (debug) {
+                        /* if (debug) {
                             this.metrics.addPrimitives(primitive, count);
-                        }
+                        } */
 
                         t += 1;
                     } while(t < endInstances);
                 } else {
                     gl.drawElements(primitive, count, indexFormat, firstIndex);
 
-                    if (debug) {
+                    /* if (debug) {
                         this.metrics.addPrimitives(primitive, count);
-                    }
+                    } */
                 }
             } else {
                 t = ((16 * 3) + 8);
@@ -4024,18 +4024,18 @@ var WebGLGraphicsDevice = (function () {
 
                         gl.drawArrays(primitive, firstIndex, count);
 
-                        if (debug) {
+                        /* if (debug) {
                             this.metrics.addPrimitives(primitive, count);
-                        }
+                        } */
 
                         t += 1;
                     } while(t < endInstances);
                 } else {
                     gl.drawArrays(primitive, firstIndex, count);
 
-                    if (debug) {
+                    /* if (debug) {
                         this.metrics.addPrimitives(primitive, count);
-                    }
+                    } */
                 }
             }
             /* tslint:enable:no-bitwise */
@@ -4170,9 +4170,9 @@ var WebGLGraphicsDevice = (function () {
                     indexFormat = indexBuffer.format;
                     indexStride = indexBuffer.stride;
 
-                    if (debug) {
+                    /* if (debug) {
                         this.metrics.indexBufferChanges += 1;
-                    }
+                    } */
                 }
 
                 firstIndex *= indexStride;
@@ -4185,18 +4185,18 @@ var WebGLGraphicsDevice = (function () {
 
                             gl.drawElements(primitive, count, indexFormat, firstIndex);
 
-                            if (debug) {
+                            /* if (debug) {
                                 this.metrics.addPrimitives(primitive, count);
-                            }
+                            } */
 
                             t += 1;
                         } while(t < endInstances);
                     } else {
                         gl.drawElements(primitive, count, indexFormat, firstIndex);
 
-                        if (debug) {
+                        /* if (debug) {
                             this.metrics.addPrimitives(primitive, count);
-                        }
+                        } */
                     }
                 } else {
                     t = ((16 * 3) + 8);
@@ -4216,9 +4216,9 @@ var WebGLGraphicsDevice = (function () {
 
                                 gl.drawElements(primitive, count, indexFormat, firstIndex);
 
-                                if (debug) {
+                                /* if (debug) {
                                     this.metrics.addPrimitives(primitive, count);
-                                }
+                                } */
                             }
 
                             t += 1;
@@ -4236,9 +4236,9 @@ var WebGLGraphicsDevice = (function () {
 
                             gl.drawElements(primitive, count, indexFormat, firstIndex);
 
-                            if (debug) {
+                            /* if (debug) {
                                 this.metrics.addPrimitives(primitive, count);
-                            }
+                            } */
                         }
                     }
                 }
@@ -4251,18 +4251,18 @@ var WebGLGraphicsDevice = (function () {
 
                             gl.drawArrays(primitive, firstIndex, count);
 
-                            if (debug) {
+                            /* if (debug) {
                                 this.metrics.addPrimitives(primitive, count);
-                            }
+                            } */
 
                             t += 1;
                         } while(t < endInstances);
                     } else {
                         gl.drawArrays(primitive, firstIndex, count);
 
-                        if (debug) {
+                        /* if (debug) {
                             this.metrics.addPrimitives(primitive, count);
-                        }
+                        } */
                     }
                 } else {
                     t = ((16 * 3) + 8);
@@ -4283,9 +4283,9 @@ var WebGLGraphicsDevice = (function () {
                                 gl.drawArrays(primitive, firstIndex, count);
                             }
 
-                            if (debug) {
+                            /* if (debug) {
                                 this.metrics.addPrimitives(primitive, count);
-                            }
+                            } */
 
                             t += 1;
                         } while(t < endInstances);
@@ -4302,9 +4302,9 @@ var WebGLGraphicsDevice = (function () {
 
                             gl.drawArrays(primitive, firstIndex, count);
 
-                            if (debug) {
+                            /* if (debug) {
                                 this.metrics.addPrimitives(primitive, count);
-                            }
+                            } */
                         }
                     }
                 }
@@ -4520,7 +4520,7 @@ var WebGLGraphicsDevice = (function () {
         this.setScissor(0, 0, this.width, this.height);
         this.setViewport(0, 0, this.width, this.height);
 
-        if (debug) {
+        /* if (debug) {
             this.metrics.renderTargetChanges = 0;
             this.metrics.textureChanges = 0;
             this.metrics.renderStateChanges = 0;
@@ -4529,7 +4529,7 @@ var WebGLGraphicsDevice = (function () {
             this.metrics.techniqueChanges = 0;
             this.metrics.drawCalls = 0;
             this.metrics.primitives = 0;
-        }
+        } */
 
         /* tslint:disable:no-string-literal */
         return !(document.hidden || document['webkitHidden']);
@@ -4537,12 +4537,12 @@ var WebGLGraphicsDevice = (function () {
     };
 
     WebGLGraphicsDevice.prototype.beginRenderTarget = function (renderTarget) {
-        debug.assert(!this.activeRenderTarget, "beginRenderTarget called before calling endRenderTarget on current render target");
+        /* debug.assert(!this.activeRenderTarget, "beginRenderTarget called before calling endRenderTarget on current render target"); */
         this.activeRenderTarget = renderTarget;
 
-        if (debug) {
+        /* if (debug) {
             this.metrics.renderTargetChanges += 1;
-        }
+        } */
 
         return (renderTarget).bind();
     };
@@ -4905,9 +4905,9 @@ var WebGLGraphicsDevice = (function () {
             var gl = this.gl;
             gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
 
-            if (debug) {
+            /* if (debug) {
                 this.metrics.vertexBufferChanges += 1;
-            }
+            } */
         }
     };
 
@@ -5102,9 +5102,9 @@ var WebGLGraphicsDevice = (function () {
                     this.setSampler(sampler, gltarget);
                 }
 
-                if (debug) {
+                /* if (debug) {
                     this.metrics.textureChanges += 1;
-                }
+                } */
             }
         } else {
             if (oldgltarget && oldglobject) {
@@ -5604,7 +5604,7 @@ var WebGLGraphicsDevice = (function () {
             techniques: 0
         };
 
-        if (debug) {
+        /* if (debug) {
             gd.metrics = {
                 renderTargetChanges: 0,
                 textureChanges: 0,
@@ -5641,7 +5641,7 @@ var WebGLGraphicsDevice = (function () {
                     }
                 }
             };
-        }
+        } */
 
         /* tslint:enable:no-bitwise */
         // State handlers
@@ -5654,9 +5654,9 @@ var WebGLGraphicsDevice = (function () {
                     gl.disable(gl.DEPTH_TEST);
                 }
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -5665,9 +5665,9 @@ var WebGLGraphicsDevice = (function () {
                 currentState.depthFunc = func;
                 gl.depthFunc(func);
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -5676,9 +5676,9 @@ var WebGLGraphicsDevice = (function () {
                 currentState.depthMask = enable;
                 gl.depthMask(enable);
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -5691,9 +5691,9 @@ var WebGLGraphicsDevice = (function () {
                     gl.disable(gl.BLEND);
                 }
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -5703,9 +5703,9 @@ var WebGLGraphicsDevice = (function () {
                 currentState.blendDst = dst;
                 gl.blendFunc(src, dst);
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -5718,9 +5718,9 @@ var WebGLGraphicsDevice = (function () {
                     gl.disable(gl.CULL_FACE);
                 }
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -5729,9 +5729,9 @@ var WebGLGraphicsDevice = (function () {
                 currentState.cullFace = face;
                 gl.cullFace(face);
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -5740,9 +5740,9 @@ var WebGLGraphicsDevice = (function () {
                 currentState.frontFace = face;
                 gl.frontFace(face);
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -5755,9 +5755,9 @@ var WebGLGraphicsDevice = (function () {
                 colorMask[3] = mask3;
                 gl.colorMask(mask0, mask1, mask2, mask3);
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -5770,9 +5770,9 @@ var WebGLGraphicsDevice = (function () {
                     gl.disable(gl.STENCIL_TEST);
                 }
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -5783,9 +5783,9 @@ var WebGLGraphicsDevice = (function () {
                 currentState.stencilMask = stencilMask;
                 gl.stencilFunc(stencilFunc, stencilRef, stencilMask);
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -5796,9 +5796,9 @@ var WebGLGraphicsDevice = (function () {
                 currentState.stencilZPass = stencilZpass;
                 gl.stencilOp(stencilFail, stencilZfail, stencilZpass);
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -5811,9 +5811,9 @@ var WebGLGraphicsDevice = (function () {
                     gl.disable(gl.POLYGON_OFFSET_FILL);
                 }
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -5823,9 +5823,9 @@ var WebGLGraphicsDevice = (function () {
                 currentState.polygonOffsetUnits = units;
                 gl.polygonOffset(factor, units);
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -5834,9 +5834,9 @@ var WebGLGraphicsDevice = (function () {
                 currentState.lineWidth = lineWidth;
                 gl.lineWidth(lineWidth);
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -5845,9 +5845,9 @@ var WebGLGraphicsDevice = (function () {
                 currentState.depthTestEnable = true;
                 gl.enable(gl.DEPTH_TEST);
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -5858,9 +5858,9 @@ var WebGLGraphicsDevice = (function () {
                 currentState.depthFunc = func;
                 gl.depthFunc(func);
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -5869,9 +5869,9 @@ var WebGLGraphicsDevice = (function () {
                 currentState.depthMask = true;
                 gl.depthMask(true);
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -5880,9 +5880,9 @@ var WebGLGraphicsDevice = (function () {
                 currentState.blendEnable = false;
                 gl.disable(gl.BLEND);
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -5895,9 +5895,9 @@ var WebGLGraphicsDevice = (function () {
                 currentState.blendDst = dst;
                 gl.blendFunc(src, dst);
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -5906,9 +5906,9 @@ var WebGLGraphicsDevice = (function () {
                 currentState.cullFaceEnable = true;
                 gl.enable(gl.CULL_FACE);
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -5919,9 +5919,9 @@ var WebGLGraphicsDevice = (function () {
                 currentState.cullFace = face;
                 gl.cullFace(face);
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -5932,9 +5932,9 @@ var WebGLGraphicsDevice = (function () {
                 currentState.frontFace = face;
                 gl.frontFace(face);
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -5948,9 +5948,9 @@ var WebGLGraphicsDevice = (function () {
                 colorMask[3] = true;
                 gl.colorMask(true, true, true, true);
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -5959,9 +5959,9 @@ var WebGLGraphicsDevice = (function () {
                 currentState.stencilTestEnable = false;
                 gl.disable(gl.STENCIL_TEST);
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -5974,9 +5974,9 @@ var WebGLGraphicsDevice = (function () {
                 currentState.stencilMask = 0xffffffff;
                 gl.stencilFunc(stencilFunc, 0, 0xffffffff);
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -5989,9 +5989,9 @@ var WebGLGraphicsDevice = (function () {
                 currentState.stencilZPass = stencilOp;
                 gl.stencilOp(stencilOp, stencilOp, stencilOp);
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -6000,9 +6000,9 @@ var WebGLGraphicsDevice = (function () {
                 currentState.polygonOffsetFillEnable = false;
                 gl.disable(gl.POLYGON_OFFSET_FILL);
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -6012,9 +6012,9 @@ var WebGLGraphicsDevice = (function () {
                 currentState.polygonOffsetUnits = 0;
                 gl.polygonOffset(0, 0);
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 
@@ -6023,9 +6023,9 @@ var WebGLGraphicsDevice = (function () {
                 currentState.lineWidth = 1;
                 gl.lineWidth(1);
 
-                if (debug) {
+                /* if (debug) {
                     gd.metrics.renderStateChanges += 1;
-                }
+                } */
             }
         }
 

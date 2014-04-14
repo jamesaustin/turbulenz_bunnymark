@@ -191,9 +191,9 @@ var WebGLTurbulenzEngine = (function () {
     };
 
     WebGLTurbulenzEngine.prototype.onperformancewarning = function (msg) {
-        if (debug) {
+        /* if (debug) {
             console.warn(msg);
-        }
+        } */
     };
 
     WebGLTurbulenzEngine.prototype.getSystemInfo = function () {
@@ -632,9 +632,9 @@ var WebGLTurbulenzEngine = (function () {
             }
             if (looksLikeNetbook()) {
                 systemInfo.platformProfile = "tablet";
-                if (debug) {
+                /* if (debug) {
                     debug.log("Setting platformProfile to 'tablet'");
-                }
+                } */
             }
         } else {
             osIndex = userAgent.indexOf('Mac OS X');
@@ -658,9 +658,9 @@ var WebGLTurbulenzEngine = (function () {
                     }
                     if (looksLikeNetbook()) {
                         systemInfo.platformProfile = "tablet";
-                        if (debug) {
+                        /* if (debug) {
                             debug.log("Setting platformProfile to 'tablet'");
-                        }
+                        } */
                     }
                 } else {
                     osIndex = userAgent.indexOf('Android');
