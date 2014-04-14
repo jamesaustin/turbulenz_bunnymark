@@ -6,7 +6,7 @@ Description
 
 Port of bunnymark to the Turbulenz Engine Draw2D module.
 
-Try it now: `Turbulenz Bunnymark <http://jamesaustin.github.io/turbulenz_bunnymark/>`__
+Try it now: http://jamesaustin.github.io/turbulenz_bunnymark/
 
 
 Contributor list
