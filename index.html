@@ -44,9 +44,15 @@
                 graphicsDevice: graphicsDevice
             });
 
-            var texture = graphicsDevice.createTexture({
+            var texture = null;
+            graphicsDevice.createTexture({
                 src: "bunny.png",
-                mipmaps: false
+                mipmaps: false,
+                onload: function (t) {
+                    if (t) {
+                        texture = t
+                    }
+                }
             });
 
             var spriteWidth = 26;
@@ -61,9 +67,10 @@
 
             var sprites = [ ];
             var initalCount = 100;
-            var maxCount = 32000;
             var objectCount = initalCount;
             var prevObjectCount;
+
+            var maxCount = 128000;
             var rawBuffer = new Float32Array(maxCount * 16);
 
             var mathRandom = Math.random;
@@ -97,6 +104,8 @@
             }
         
             function update() {
+                if (texture === null) return;
+
                 stats.begin();
                 if (graphicsDevice.beginFrame()) {
                     validateSprites();
